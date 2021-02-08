@@ -70,8 +70,8 @@ class GradeController extends AbstractController
         $grade = new Grade;
         $grade
             ->setGrade($r->request->get('grade_grade'))
-            ->setStudentId($r->request->get('grade_student_id'))
-            ->setLectureId($r->request->get('grade_lecture_id'));
+            ->setStudentId($r->request->get('grades_student'))
+            ->setLectureId($r->request->get('grades_lecture'));
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($grade);

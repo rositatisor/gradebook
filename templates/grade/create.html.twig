@@ -17,7 +17,7 @@
         <form action="{{path('grade_store')}}" method="POST">
             <div class="new">
                 <p>Student:</p>
-                <select name="grade_student_id">
+                <select name="grades_student">
                         <option value="0">Select student</option>
                     {% for student in students %}
                         <option value="{{student.id}}">{{student.name}} {{student.surname}}</option>
@@ -26,7 +26,7 @@
             </div>
             <div class="new">
                 <p>Lecture:</p>
-                <select name="grade_lecture_id">
+                <select name="grades_lecture">
                         <option value="0">Select lecture</option>
                     {% for lecture in lectures %}
                         <option value="{{lecture.id}}">{{lecture.name}}</option>
