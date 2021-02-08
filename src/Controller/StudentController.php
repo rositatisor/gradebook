@@ -8,6 +8,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Student;
+use App\Entity\Lecture;
+use App\Entity\Grade;
 
 class StudentController extends AbstractController
 {
@@ -30,6 +32,33 @@ class StudentController extends AbstractController
             'controller_name' => 'StudentController',
             'students' => $students,
             'sortBy' => $r->query->get('sort') ?? 'default',
+        ]);
+    }
+
+    /**
+     * @Route("/student/{id}", name="student_view", methods={"POST"})
+     */
+    public function view(request $r, int $id): Response
+    {
+        $student = $this->getDoctrine()
+            ->getRepository(Student::class)
+            ->find($id);
+
+        $lectures = $this->getDoctrine()
+            ->getRepository(Lecture::class)
+            ->findBy([],['name'=>'asc']);
+
+        $grades = $this->getDoctrine()
+            ->getRepository(Grade::class);
+            if ($r->query->get('student_id') !== null && $r->query->get('student_id') != 0) 
+                $grades = $grades->findBy(['student_id' => $r->query->get('student_id')]);
+            elseif ($r->query->get('student_id') == 0) $grades = $grades->findAll();
+            else $grades = $grades->findAll();
+
+        return $this->render('student/view.html.twig', [
+            'grades' => $grades,
+            'lectures' => $lectures,
+            'student' => $student
         ]);
     }
 

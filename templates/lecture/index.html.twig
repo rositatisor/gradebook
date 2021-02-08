@@ -35,7 +35,7 @@
                     <div class="right">
                         <div class="title">{{lecture.name}}</div>
                         {% for grade in lecture.grades %}
-                            <div class="books" style="display:inline;">{{grade.grade}}</div>
+                            <div class="books lecture" style="display:inline;">{{grade.grade}}</div>
                         {% endfor %}
                         <div class="buttons author">
                             <a class="edit-btn" href="{{path('lecture_edit', {id: lecture.id})}}">Edit</a>

@@ -36,15 +36,18 @@
                     </div>
                     <div class="right">
                         <div class="title">{{student.name}} {{student.surname}}</div>
-                            {% for grade in student.grades %}
+                            {# {% for grade in student.grades %}
                                 <div class="books">
                                 {{grade.lecture.name}} {{grade.grade}}
                                 </div>
-                            {% endfor %}
+                            {% endfor %} #}
                         <div class="buttons author">
                             <a class="edit-btn" href="{{path('student_edit', {id: student.id})}}">Edit</a>
                             <form action="{{path('student_delete', {id:student.id})}}" method="POST">
                                 <button class="submit-btn" type="submit">Delete</button>
+                            </form>
+                            <form action="{{path('student_view', {id:student.id})}}" method="POST">
+                                <button class="view-btn" type="submit">View grades</button>
                             </form>
                         </div>
                     </div>
