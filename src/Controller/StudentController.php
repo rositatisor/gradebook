@@ -16,6 +16,8 @@ class StudentController extends AbstractController
      */
     public function index(request $r): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $students = $this->getDoctrine()
             ->getRepository(Student::class);
             if ($r->query->get('sort') == 'name_az') $students = $students->findBy([], ['name' => 'asc', 'surname' => 'asc']);
@@ -45,7 +47,8 @@ class StudentController extends AbstractController
             'student_name' => $student_name[0] ?? '',
             'student_surname' => $student_surname[0] ?? '',
             'student_email' => $student_email[0] ?? '',
-            'student_phone' => $student_phone[0] ?? ''
+            'student_phone' => $student_phone[0] ?? '',
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -60,6 +63,18 @@ class StudentController extends AbstractController
             ->setSurname($r->request->get('student_surname'))
             ->setEmail($r->request->get('student_email'))
             ->setPhone($r->request->get('student_phone'));
+
+        $errors = $validator->validate($student);
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            $r->getSession()->getFlashBag()->add('student_name', $r->request->get('student_name'));
+            $r->getSession()->getFlashBag()->add('student_surname', $r->request->get('student_surname'));
+            $r->getSession()->getFlashBag()->add('student_email', $r->request->get('student_email'));
+            $r->getSession()->getFlashBag()->add('student_phone', $r->request->get('student_phone'));
+            return $this->redirectToRoute('student_create');
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($student);
@@ -87,7 +102,8 @@ class StudentController extends AbstractController
             'student_name' => $student_name[0] ?? '',
             'student_surname' => $student_surname[0] ?? '',
             'student_email' => $student_email[0] ?? '',
-            'student_phone' => $student_phone[0] ?? ''
+            'student_phone' => $student_phone[0] ?? '',
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -105,6 +121,18 @@ class StudentController extends AbstractController
             ->setSurname($r->request->get('student_surname'))
             ->setEmail($r->request->get('student_email'))
             ->setPhone($r->request->get('student_phone'));
+
+        $errors = $validator->validate($student);
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            $r->getSession()->getFlashBag()->add('student_name', $r->request->get('student_name'));
+            $r->getSession()->getFlashBag()->add('student_surname', $r->request->get('student_surname'));
+            $r->getSession()->getFlashBag()->add('student_email', $r->request->get('student_email'));
+            $r->getSession()->getFlashBag()->add('student_phone', $r->request->get('student_phone'));
+            return $this->redirectToRoute('student_edit', ['id'=>$student->getId()]);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($student);

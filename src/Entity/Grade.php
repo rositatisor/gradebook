@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\GradeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GradeRepository::class)
@@ -29,6 +30,7 @@ class Grade
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Positive(message="Grade should be a positive integer.")
      */
     private $grade;
 

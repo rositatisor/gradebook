@@ -16,6 +16,8 @@ class LectureController extends AbstractController
      */
     public function index(request $r): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $lectures = $this->getDoctrine()
             ->getRepository(Lecture::class);
             if ($r->query->get('sort') == 'name_az') $lectures = $lectures->findBy([], ['name' => 'asc']);
@@ -39,7 +41,8 @@ class LectureController extends AbstractController
 
         return $this->render('lecture/create.html.twig', [
             'lecture_name' => $lecture_name[0] ?? '',
-            'lecture_description' => $lecture_description[0] ?? ''
+            'lecture_description' => $lecture_description[0] ?? '',
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -52,6 +55,16 @@ class LectureController extends AbstractController
         $lecture
             ->setName($r->request->get('lecture_name'))
             ->setDescription($r->request->get('lecture_description'));
+
+        $errors = $validator->validate($lecture);
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            $r->getSession()->getFlashBag()->add('lecture_name', $r->request->get('lecture_name'));
+            $r->getSession()->getFlashBag()->add('lecture_description', $r->request->get('lecture_description'));
+            return $this->redirectToRoute('lecture_create');
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($lecture);
@@ -75,7 +88,8 @@ class LectureController extends AbstractController
         return $this->render('lecture/edit.html.twig', [
             'lecture' => $lecture,
             'lecture_name' => $lecture_name[0] ?? '',
-            'lecture_description' => $lecture_description[0] ?? ''
+            'lecture_description' => $lecture_description[0] ?? '',
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -91,6 +105,16 @@ class LectureController extends AbstractController
         $lecture
             ->setName($r->request->get('lecture_name'))
             ->setDescription($r->request->get('lecture_description'));
+
+        $errors = $validator->validate($lecture);
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            $r->getSession()->getFlashBag()->add('lecture_name', $r->request->get('lecture_name'));
+            $r->getSession()->getFlashBag()->add('lecture_description', $r->request->get('lecture_description'));
+            return $this->redirectToRoute('lecture_edit', ['id'=>$lecture->getId()]);
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($lecture);

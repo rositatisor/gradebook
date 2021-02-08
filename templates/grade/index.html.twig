@@ -19,6 +19,7 @@
             <form action="{{path('grade_index')}}" method="GET">
                 <select name="student_id">
                     <option value="0">View all</option>
+                    //TODO: filter kad pasiliktų studentas išfiltruotas kaip selected
                     {% for student in students %}
                         <option value="{{student.id}}">{{student.name}} {{student.surname}}</option>
                     {% endfor %}

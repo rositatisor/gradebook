@@ -6,6 +6,7 @@ use App\Repository\StudentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=StudentRepository::class)
@@ -21,21 +22,51 @@ class Student
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Name should not be blank.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Name must be at least {{ limit }} characters long.",
+     *      maxMessage = "Name cannot be longer than {{ limit }} characters."
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your name cannot contain a number"
+     * )
+
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank(message="Name should not be blank.")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 64,
+     *      minMessage = "Surname must be at least {{ limit }} characters long.",
+     *      maxMessage = "Surname cannot be longer than {{ limit }} characters."
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Your surname cannot contain a number"
+     * )
      */
     private $surname;
 
     /**
      * @ORM\Column(type="string", length=64)
+     * /**
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @Assert\Regex(pattern="/^[0-9]*$/", message="Numbers only.") 
      */
     private $phone;
 

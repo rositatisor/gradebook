@@ -18,6 +18,8 @@ class GradeController extends AbstractController
      */
     public function index(request $r): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         $lectures = $this->getDoctrine()
             ->getRepository(Lecture::class)
             ->findBy([],['name'=>'asc']);
@@ -61,7 +63,8 @@ class GradeController extends AbstractController
             'students' => $students,
             'grade_grade' => $grade_grade[0] ?? '',
             'grade_student_id' => $grade_student_id[0] ?? '',
-            'grade_lecture_id' => $grade_grade_id[0] ?? ''
+            'grade_lecture_id' => $grade_grade_id[0] ?? '',
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -78,11 +81,26 @@ class GradeController extends AbstractController
             ->getRepository(Lecture::class)
             ->find($r->request->get('grades_lecture'));
 
+        if($student == null) $r->getSession()->getFlashBag()->add('errors', 'Student must be selected.');
+        if($lecture == null) $r->getSession()->getFlashBag()->add('errors', 'Lecture must be selected.');
+
         $grade = new Grade;
         $grade
-            ->setGrade($r->request->get('grade_grade'))
+            ->setGrade((int)$r->request->get('grade_grade'))
             ->setStudent($student)
             ->setLecture($lecture);
+
+        $errors = $validator->validate($grade);
+        if (count($errors) > 0 or $lecture == null or $student == null) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            $r->getSession()->getFlashBag()->add('grade_grade', $r->request->get('grade_grade'));
+            $r->getSession()->getFlashBag()->add('grade_student_id', $r->request->get('grade_student_id'));
+            $r->getSession()->getFlashBag()->add('grade_lecture_id', $r->request->get('grade_lecture_id'));
+
+            return $this->redirectToRoute('grade_create');
+        }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($grade);
@@ -112,6 +130,7 @@ class GradeController extends AbstractController
             'grade' => $grade,
             'lectures' => $lectures,
             'students' => $students,
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -136,7 +155,15 @@ class GradeController extends AbstractController
             ->setGrade($r->request->get('grade_grade'))
             ->setStudent($student)
             ->setLecture($lecture);
-            
+
+        $errors = $validator->validate($grade);
+        if (count($errors) > 0) {
+            foreach ($errors as $error) {
+                $r->getSession()->getFlashBag()->add('errors', $error->getMessage());
+            }
+            return $this->redirectToRoute('grade_edit', ['id'=>$grade->getId()]);
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($grade);
         $entityManager->flush();
