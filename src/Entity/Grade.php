@@ -32,6 +32,16 @@ class Grade
      */
     private $grade;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Lecture::class, inversedBy="grades")
+     */
+    private $lecture;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Student::class, inversedBy="grades")
+     */
+    private $student;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +79,30 @@ class Grade
     public function setGrade(int $grade): self
     {
         $this->grade = $grade;
+
+        return $this;
+    }
+
+    public function getLecture(): ?Lecture
+    {
+        return $this->lecture;
+    }
+
+    public function setLecture(?Lecture $lecture): self
+    {
+        $this->lecture = $lecture;
+
+        return $this;
+    }
+
+    public function getStudent(): ?Student
+    {
+        return $this->student;
+    }
+
+    public function setStudent(?Student $student): self
+    {
+        $this->student = $student;
 
         return $this;
     }

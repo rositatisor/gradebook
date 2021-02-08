@@ -27,8 +27,11 @@ class GradeController extends AbstractController
             ->findBy([],['surname'=>'asc']);
 
         $grades = $this->getDoctrine()
-            ->getRepository(Grade::class)
-            ->findAll();
+            ->getRepository(Grade::class);
+            if ($r->query->get('student_id') !== null && $r->query->get('student_id') != 0) 
+                $grades = $grades->findBy(['student_id' => $r->query->get('student_id')]);
+            elseif ($r->query->get('student_id') == 0) $grades = $grades->findAll();
+            else $grades = $grades->findAll();
 
         return $this->render('grade/index.html.twig', [
             'controller_name' => 'GradeController',
@@ -67,11 +70,19 @@ class GradeController extends AbstractController
      */
     public function store(request $r, ValidatorInterface $validator): Response
     {
+        $student = $this->getDoctrine()
+            ->getRepository(Student::class)
+            ->find($r->request->get('grades_student'));
+
+        $lecture = $this->getDoctrine()
+            ->getRepository(Lecture::class)
+            ->find($r->request->get('grades_lecture'));
+
         $grade = new Grade;
         $grade
             ->setGrade($r->request->get('grade_grade'))
-            ->setStudentId($r->request->get('grades_student'))
-            ->setLectureId($r->request->get('grades_lecture'));
+            ->setStudent($student)
+            ->setLecture($lecture);
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($grade);
@@ -109,14 +120,22 @@ class GradeController extends AbstractController
      */
     public function update(request $r, $id, ValidatorInterface $validator): Response
     {
+        $student = $this->getDoctrine()
+            ->getRepository(Student::class)
+            ->find($r->request->get('grades_student'));
+
+        $lecture = $this->getDoctrine()
+            ->getRepository(Lecture::class)
+            ->find($r->request->get('grades_lecture'));
+
         $grade = $this->getDoctrine()
             ->getRepository(Grade::class)
             ->find($id);
         
         $grade
             ->setGrade($r->request->get('grade_grade'))
-            ->setStudentId($r->request->get('grades_student'))
-            ->setLectureId($r->request->get('grades_lecture'));
+            ->setStudent($student)
+            ->setLecture($lecture);
             
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($grade);
@@ -133,7 +152,7 @@ class GradeController extends AbstractController
         $grade = $this->getDoctrine()
             ->getRepository(Grade::class)
             ->find($id);
-        
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($grade);
         $entityManager->flush();

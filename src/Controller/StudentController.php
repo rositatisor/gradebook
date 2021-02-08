@@ -17,12 +17,17 @@ class StudentController extends AbstractController
     public function index(request $r): Response
     {
         $students = $this->getDoctrine()
-            ->getRepository(Student::class)
-            ->findAll();
+            ->getRepository(Student::class);
+            if ($r->query->get('sort') == 'name_az') $students = $students->findBy([], ['name' => 'asc', 'surname' => 'asc']);
+            elseif ($r->query->get('sort') == 'name_za') $students = $students->findBy([], ['name' => 'desc']);
+            elseif ($r->query->get('sort') == 'surname_az') $students = $students->findBy([], ['surname' => 'asc']);
+            elseif ($r->query->get('sort') == 'surname_za') $students = $students->findBy([], ['surname' => 'desc']);
+            else $students = $students->findAll();
 
         return $this->render('student/index.html.twig', [
             'controller_name' => 'StudentController',
-            'students' => $students
+            'students' => $students,
+            'sortBy' => $r->query->get('sort') ?? 'default',
         ]);
     }
 
@@ -116,6 +121,10 @@ class StudentController extends AbstractController
         $student = $this->getDoctrine()
             ->getRepository(Student::class)
             ->find($id);
+        
+        if ($student->getGrades()->count() > 0) {
+            return new Response('Selected Student (#id: '.$student->getId().') can not be deleted, because '.$student->getName().' has '.$student->getGrades()->count().' grades.');
+        }
         
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($student);

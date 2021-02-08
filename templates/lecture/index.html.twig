@@ -14,20 +14,18 @@
         <a class="nav" href="{{path('student_create')}}">New Student</a>
     </div>
     <div class="container author">
-        {# <div class="sort">
+        <div class="sort">
             <p>List order by:</p> 
             <form action="{{path('lecture_index')}}" method="GET">
                 <select name="sort">
                     <option value="default">Default</option>
                     <option value="name_az" {% if sortBy == 'name_az' %} selected {% endif %}>Name A-Z</option>
                     <option value="name_za" {% if sortBy == 'name_za' %} selected {% endif %}>Name Z-A</option>
-                    <option value="surname_az" {% if sortBy == 'surname_az' %} selected {% endif %}>Surname A-Z</option>
-                    <option value="surname_za" {% if sortBy == 'surname_za' %} selected {% endif %}>Surname Z-A</option>
                 </select>
                 <button type="submit">Sort</button>
             </form>
             <a href="{{path('lecture_index')}}">Clear sort</a>
-        </div> #}
+        </div>
         <ul class="author-list">
             {% for lecture in lectures %}
                 <div class="authors">
@@ -36,9 +34,9 @@
                     </div>
                     <div class="right">
                         <div class="title">{{lecture.name}}</div>
-                        {# {% for grade in lecture.grades %}
-                            <div class="books">{{book.title}}</div>
-                        {% endfor %} #}
+                        {% for grade in lecture.grades %}
+                            <div class="books" style="display:inline;">{{grade.grade}}</div>
+                        {% endfor %}
                         <div class="buttons author">
                             <a class="edit-btn" href="{{path('lecture_edit', {id: lecture.id})}}">Edit</a>
                             <form action="{{path('lecture_delete', {id:lecture.id})}}" method="POST">

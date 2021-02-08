@@ -17,12 +17,15 @@ class LectureController extends AbstractController
     public function index(request $r): Response
     {
         $lectures = $this->getDoctrine()
-            ->getRepository(Lecture::class)
-            ->findAll();
+            ->getRepository(Lecture::class);
+            if ($r->query->get('sort') == 'name_az') $lectures = $lectures->findBy([], ['name' => 'asc']);
+            elseif ($r->query->get('sort') == 'name_za') $lectures = $lectures->findBy([], ['name' => 'desc']);
+            else $lectures = $lectures->findAll();
 
         return $this->render('lecture/index.html.twig', [
             'controller_name' => 'LectureController',
-            'lectures' => $lectures
+            'lectures' => $lectures,
+            'sortBy' => $r->query->get('sort') ?? 'default',
         ]);
     }
 
@@ -104,7 +107,11 @@ class LectureController extends AbstractController
         $lecture = $this->getDoctrine()
             ->getRepository(Lecture::class)
             ->find($id);
-        
+
+        if ($lecture->getGrades()->count() > 0) {
+            return new Response('Selected Lecture (#id: '.$lecture->getId().') can not be deleted, because '.$lecture->getName().' has '.$lecture->getGrades()->count().' grades.');
+        }
+
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($lecture);
         $entityManager->flush();

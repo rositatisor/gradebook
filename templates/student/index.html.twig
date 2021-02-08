@@ -14,7 +14,7 @@
         <a class="nav" href="{{path('student_create')}}">New Student</a>
     </div>
     <div class="container author">
-        {# <div class="sort">
+        <div class="sort">
             <p>List order by:</p> 
             <form action="{{path('student_index')}}" method="GET">
                 <select name="sort">
@@ -27,7 +27,7 @@
                 <button type="submit">Sort</button>
             </form>
             <a href="{{path('student_index')}}">Clear sort</a>
-        </div> #}
+        </div>
         <ul class="author-list">
             {% for student in students %}
                 <div class="authors">
@@ -36,9 +36,11 @@
                     </div>
                     <div class="right">
                         <div class="title">{{student.name}} {{student.surname}}</div>
-                        {# {% for grade in student.grades %}
-                            <div class="books">{{book.title}}</div>
-                        {% endfor %} #}
+                            {% for grade in student.grades %}
+                                <div class="books">
+                                {{grade.lecture.name}} {{grade.grade}}
+                                </div>
+                            {% endfor %}
                         <div class="buttons author">
                             <a class="edit-btn" href="{{path('student_edit', {id: student.id})}}">Edit</a>
                             <form action="{{path('student_delete', {id:student.id})}}" method="POST">
