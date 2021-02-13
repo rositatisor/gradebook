@@ -3,14 +3,14 @@
 {% block title %}Create new Grade{% endblock %}
 
 {% block body %}
-    <h1 class="create">Create new Grade</h1>
+    <h1 class="create">Edit Grade</h1>
     <div class="container create">
         <form action="{{path('grade_store')}}" method="POST">
             <div class="new">
                 <label for="grades_student">Student:</label>
                 <select name="grades_student" id="grades_student">
                     {% for student in students %}
-                        <option value="{{student.id}}"{% if grade.id == grade.studentId %} selected {% endif %}>{{student.name}} {{student.surname}}</option>
+                        <option value="{{student.id}}"{% if student.id == grade.studentId %} selected {% endif %}>{{student.name}} {{student.surname}}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -18,7 +18,7 @@
                 <label for="grades_lecture">Lecture:</label>
                 <select name="grades_lecture" id="grades_lecture">
                     {% for lecture in lectures %}
-                        <option value="{{lecture.id}}"{% if grade.id == grade.lectureId %} selected {% endif %}>{{lecture.name}}</option>
+                        <option value="{{lecture.id}}"{% if lecture.id == grade.lectureId %} selected {% endif %}>{{lecture.name}}</option>
                     {% endfor %}
                 </select>
             </div>

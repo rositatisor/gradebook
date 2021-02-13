@@ -40,7 +40,8 @@ class GradeController extends AbstractController
             'studentId' => $r->query->get('student_id') ?? 0,
             'grades' => $grades,
             'lectures' => $lectures,
-            'students' => $students
+            'students' => $students,
+            'success' => $r->getSession()->getFlashBag()->get('success', [])
         ]);
     }
 
@@ -107,6 +108,8 @@ class GradeController extends AbstractController
         $entityManager->persist($grade);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', 'Grade '.$grade->getGrade().' from '.$grade->getLecture()->getName().' for '.$grade->getStudent()->getName().' '.$grade->getStudent()->getSurname().' was created.');
+
         return $this->redirectToRoute('grade_index');
     }
 
@@ -131,7 +134,8 @@ class GradeController extends AbstractController
             'grade' => $grade,
             'lectures' => $lectures,
             'students' => $students,
-            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
+            'errors' => $r->getSession()->getFlashBag()->get('errors', []),
+            'success' => $r->getSession()->getFlashBag()->get('success', [])
         ]);
     }
 
@@ -169,13 +173,15 @@ class GradeController extends AbstractController
         $entityManager->persist($grade);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', 'Grade '.$grade->getGrade().' for '.$grade->getStudent()->getName().' '.$grade->getStudent()->getSurname().' was updated.');
+
         return $this->redirectToRoute('grade_index');
     }
 
     /**
      * @Route("/grade/delete/{id}", name="grade_delete", methods={"POST"})
      */
-    public function delete($id): Response
+    public function delete(request $r, int $id): Response
     {
         $grade = $this->getDoctrine()
             ->getRepository(Grade::class)
@@ -184,6 +190,8 @@ class GradeController extends AbstractController
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($grade);
         $entityManager->flush();
+
+        $r->getSession()->getFlashBag()->add('success', 'Grade '.$grade->getGrade().' from '.$grade->getLecture()->getName().' for '.$grade->getStudent()->getName().' '.$grade->getStudent()->getSurname().' was deleted.');
 
         return $this->redirectToRoute('grade_index');
     }

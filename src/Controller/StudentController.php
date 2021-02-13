@@ -32,11 +32,13 @@ class StudentController extends AbstractController
             'controller_name' => 'StudentController',
             'students' => $students,
             'sortBy' => $r->query->get('sort') ?? 'default',
+            'success' => $r->getSession()->getFlashBag()->get('success', []),
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
     /**
-     * @Route("/student/{id}", name="student_view", methods={"POST"})
+     * @Route("/student/view/{id}", name="student_view", methods={"POST"})
      */
     public function view(request $r, int $id): Response
     {
@@ -109,6 +111,8 @@ class StudentController extends AbstractController
         $entityManager->persist($student);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', $student->getName().' '.$student->getSurname().' was created.');
+
         return $this->redirectToRoute('student_index');
     }
 
@@ -132,7 +136,8 @@ class StudentController extends AbstractController
             'student_surname' => $student_surname[0] ?? '',
             'student_email' => $student_email[0] ?? '',
             'student_phone' => $student_phone[0] ?? '',
-            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
+            'errors' => $r->getSession()->getFlashBag()->get('errors', []),
+            'success' => $r->getSession()->getFlashBag()->get('success', [])
         ]);
     }
 
@@ -167,25 +172,30 @@ class StudentController extends AbstractController
         $entityManager->persist($student);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', $student->getName().' '.$student->getSurname().' was updated.');
+
         return $this->redirectToRoute('student_index');
     }
 
     /**
      * @Route("/student/delete/{id}", name="student_delete", methods={"POST"})
      */
-    public function delete($id): Response
+    public function delete(request $r, int $id): Response
     {
         $student = $this->getDoctrine()
             ->getRepository(Student::class)
             ->find($id);
         
         if ($student->getGrades()->count() > 0) {
-            return new Response('Selected Student (#id: '.$student->getId().') can not be deleted, because '.$student->getName().' has '.$student->getGrades()->count().' grades.');
+            $r->getSession()->getFlashBag()->add('errors', 'Selected student '.$student->getName().' '.$student->getSurname().' cannot be deleted ('.$student->getGrades()->count().' grade/-s assigned).');
+            return $this->redirectToRoute('student_index');
         }
         
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($student);
         $entityManager->flush();
+
+        $r->getSession()->getFlashBag()->add('success', $student->getName().' '.$student->getSurname().' was successfully deleted.');
 
         return $this->redirectToRoute('student_index');
     }

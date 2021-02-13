@@ -28,6 +28,8 @@ class LectureController extends AbstractController
             'controller_name' => 'LectureController',
             'lectures' => $lectures,
             'sortBy' => $r->query->get('sort') ?? 'default',
+            'success' => $r->getSession()->getFlashBag()->get('success', []),
+            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
         ]);
     }
 
@@ -70,6 +72,8 @@ class LectureController extends AbstractController
         $entityManager->persist($lecture);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', $lecture->getName().' was created.');
+
         return $this->redirectToRoute('lecture_index');
     }
 
@@ -89,7 +93,8 @@ class LectureController extends AbstractController
             'lecture' => $lecture,
             'lecture_name' => $lecture_name[0] ?? '',
             'lecture_description' => $lecture_description[0] ?? '',
-            'errors' => $r->getSession()->getFlashBag()->get('errors', [])
+            'errors' => $r->getSession()->getFlashBag()->get('errors', []),
+            'success' => $r->getSession()->getFlashBag()->get('success', [])
         ]);
     }
 
@@ -120,25 +125,30 @@ class LectureController extends AbstractController
         $entityManager->persist($lecture);
         $entityManager->flush();
 
+        $r->getSession()->getFlashBag()->add('success', $lecture->getName().' was updated.');
+
         return $this->redirectToRoute('lecture_index');
     }
 
     /**
      * @Route("/lecture/delete/{id}", name="lecture_delete", methods={"POST"})
      */
-    public function delete($id): Response
+    public function delete(request $r, int $id): Response
     {
         $lecture = $this->getDoctrine()
             ->getRepository(Lecture::class)
             ->find($id);
 
         if ($lecture->getGrades()->count() > 0) {
-            return new Response('Selected Lecture (#id: '.$lecture->getId().') can not be deleted, because '.$lecture->getName().' has '.$lecture->getGrades()->count().' grades.');
+            $r->getSession()->getFlashBag()->add('errors', 'Selected lecture '.$lecture->getName().' cannot be deleted ('.$lecture->getGrades()->count().' grade/-s assigned).');
+            return $this->redirectToRoute('lecture_index');
         }
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($lecture);
         $entityManager->flush();
+
+        $r->getSession()->getFlashBag()->add('success', $lecture->getName().' was successfully deleted.');
 
         return $this->redirectToRoute('lecture_index');
     }

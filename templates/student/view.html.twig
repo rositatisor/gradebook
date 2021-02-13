@@ -4,20 +4,23 @@
 
 {% block body %}
     <h1>List of Students</h1>
-    <div class="container author">
-        <ul class="author-list">
-                <div class="authors">
+    <div class="container item">
+        <ul class="item-list">
+                <div class="items">
                     <div class="left">
-                        <div class="preview author"></div>
+                        <div class="preview person"></div>
                     </div>
                     <div class="right">
                         <div class="title">{{student.name}} {{student.surname}}</div>
+                            {% if student.grades is empty %}
+                            <p class="empty">There are no grades to show.</p>
+                            {% endif %}
                             {% for grade in student.grades %}
-                                <div class="books">
+                                <div class="list">
                                 {{grade.lecture.name}} {{grade.grade}}
                                 </div>
                             {% endfor %}
-                        <div class="buttons author">
+                        <div class="buttons item">
                     </div>
                 </div>
             </div>
