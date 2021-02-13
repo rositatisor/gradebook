@@ -5,7 +5,7 @@
 {% block body %}
     <h1 class="create">Edit Grade</h1>
     <div class="container create">
-        <form action="{{path('grade_store')}}" method="POST">
+        <form action="{{path('grade_update', {id: grade.id})}}" method="POST">
             <div class="new">
                 <label for="grades_student">Student:</label>
                 <select name="grades_student" id="grades_student">

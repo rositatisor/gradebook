@@ -173,7 +173,7 @@ class GradeController extends AbstractController
         $entityManager->persist($grade);
         $entityManager->flush();
 
-        $r->getSession()->getFlashBag()->add('success', 'Grade '.$grade->getGrade().' for '.$grade->getStudent()->getName().' '.$grade->getStudent()->getSurname().' was updated.');
+        $r->getSession()->getFlashBag()->add('success', 'Grade '.$grade->getGrade().' from '.$grade->getLecture()->getName().' for '.$grade->getStudent()->getName().' '.$grade->getStudent()->getSurname().' was updated.');
 
         return $this->redirectToRoute('grade_index');
     }
