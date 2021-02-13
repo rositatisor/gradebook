@@ -4,23 +4,14 @@
 
 {% block body %}
     <h1 class="create">Create new Lecture</h1>
-    <div class="hero-bg create"></div>
-    <div class="menu">
-        <a class="nav" href="{{path('grade_index')}}">Grade list</a>
-        <a class="nav" href="{{path('grade_create')}}">New Grade</a>
-        <a class="nav" href="{{path('lecture_index')}}">Lecture list</a>
-        <a class="nav checked" href="{{path('lecture_create')}}">New Lecture</a>
-        <a class="nav" href="{{path('student_index')}}">Student list</a>
-        <a class="nav" href="{{path('student_create')}}">New Student</a>
-    </div>
     <div class="container create">
         <form action="{{path('lecture_store')}}" method="POST">
             <div class="new">
-                <p>Name:</p> 
-                <input type="text" name="lecture_name" value="{{ lecture_name }}">
+                <label for="lecture_name">Name:</label> 
+                <input type="text" name="lecture_name" value="{{ lecture_name }}" id="lecture_name">
             </div>
             <div class="new">
-                <p>Description:</p> 
+                <label>Description:</label> 
                 <textarea name="lecture_description" id="summernote"></textarea>
             </div> 
             <button class="submit-btn create" type="submit">Add new Lecture</button>

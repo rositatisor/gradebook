@@ -4,10 +4,18 @@
 
 {% block body %}
     <h1>Edit Lecture</h1>
+    <div class="container create">
     <form action="{{path('lecture_update', {id:lecture.id})}}" method="POST">
-        Name: <input type="text" name="lecture_name" value="{{lecture.name}}">
-        Description: <input type="text" name="lecture_description" value="{{lecture.description}}">
-        <button type="submit">Edit Lecture</button>
+       <div class="new">
+            <label for="lecture_name">Name:</label> 
+            <input type="text" name="lecture_name" value="{{lecture.name}}" id="lecture_name">
+        </div>
+        <div class="new">
+            <label for="lecture_description">Description:</label> 
+            <textarea name="lecture_description" id="summernote">{{lecture.description}}</textarea>
+        </div>
+        <button class="submit-btn create" type="submit">Edit Lecture</button>
         {# <input type="hidden" name="token" value="{{csrf_token('')}}"/> #}
     </form>
+    </div> 
 {% endblock %}

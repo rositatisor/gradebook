@@ -4,36 +4,27 @@
 
 {% block body %}
     <h1 class="create">Create new Grade</h1>
-    <div class="hero-bg create"></div>
-    <div class="menu">
-        <a class="nav checked" href="{{path('grade_index')}}">Grade list</a>
-        <a class="nav" href="{{path('grade_create')}}">New Grade</a>
-        <a class="nav" href="{{path('lecture_index')}}">Lecture list</a>
-        <a class="nav" href="{{path('lecture_create')}}">New Lecture</a>
-        <a class="nav" href="{{path('student_index')}}">Student list</a>
-        <a class="nav" href="{{path('student_create')}}">New Student</a>
-    </div>
     <div class="container create">
         <form action="{{path('grade_store')}}" method="POST">
             <div class="new">
-                <p>Student:</p>
-                <select name="grades_student">
+                <label for="grades_student">Student:</label>
+                <select name="grades_student" id="grades_student">
                     {% for student in students %}
                         <option value="{{student.id}}"{% if grade.id == grade.studentId %} selected {% endif %}>{{student.name}} {{student.surname}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="new">
-                <p>Lecture:</p>
-                <select name="grades_lecture">
+                <label for="grades_lecture">Lecture:</label>
+                <select name="grades_lecture" id="grades_lecture">
                     {% for lecture in lectures %}
                         <option value="{{lecture.id}}"{% if grade.id == grade.lectureId %} selected {% endif %}>{{lecture.name}}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="new">
-                <p>Grade:</p>
-                <input type="text" name="grade_grade" value="{{grade.grade}}">
+                <label for="grade_grade">Grade:</label>
+                <input type="text" name="grade_grade" value="{{grade.grade}}" id="grade_grade">
             </div>
             <button class="submit-btn create" type="submit">Edit Grade</button>
             {# <input type="hidden" name="token" value="{{csrf_token('')}}"/> #}

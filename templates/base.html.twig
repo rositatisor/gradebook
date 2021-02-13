@@ -3,8 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link href="http://localhost/gradebook/public/build/app.css" rel="stylesheet">
+        
+        <link href="http://localhost/gradebook/public/build/app.css?v={{ date().timestamp }}" rel="stylesheet">
         <script src="http://localhost/gradebook/public/build/app.js" defer></script>
+        
         <!-- include libraries(jQuery, bootstrap) -->
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -16,10 +18,20 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% if errors is defined and errors|length > 0%}
-            {% include 'msg/validation.html.twig'%}
-        {% endif %}
+        {% set route_name = app.request.attributes.get('_route') %}
 
-        {% block body %}{% endblock %}
+        {% include 'menu.html.twig'%}
+        {% if route_name != 'app_register' %}
+            {% include 'nav.html.twig'%}
+        {% endif %}
+        <main>
+            {% if errors is defined and errors|length > 0%}
+                {% include 'msg/validation.html.twig'%}
+            {% endif %}
+            {% if success is defined and success|length > 0%}
+                {% include 'msg/success.html.twig'%}
+            {% endif %}
+            {% block body %}{% endblock %}
+        </main>
     </body>
 </html>

@@ -1,0 +1,10 @@
+{% set route_name = app.request.attributes.get('_route') %}
+<div class="hero-bg"></div>
+<div class="menu">
+    <a class="nav {% if route_name == 'grade_index' %} checked {% endif %}" href="{{path('grade_index')}}">Grade list</a>
+    <a class="nav {% if route_name == 'grade_create' %} checked {% endif %}" href="{{path('grade_create')}}">New Grade</a>
+    <a class="nav {% if route_name == 'lecture_index' %} checked {% endif %}" href="{{path('lecture_index')}}">Lecture list</a>
+    <a class="nav {% if route_name == 'lecture_create' %} checked {% endif %}" href="{{path('lecture_create')}}">New Lecture</a>
+    <a class="nav {% if route_name == 'student_index' %} checked {% endif %}" href="{{path('student_index')}}">Student list</a>
+    <a class="nav {% if route_name == 'student_create' %} checked {% endif %}" href="{{path('student_create')}}">New Student</a>
+</div>

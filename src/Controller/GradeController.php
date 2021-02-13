@@ -37,6 +37,7 @@ class GradeController extends AbstractController
 
         return $this->render('grade/index.html.twig', [
             'controller_name' => 'GradeController',
+            'studentId' => $r->query->get('student_id') ?? 0,
             'grades' => $grades,
             'lectures' => $lectures,
             'students' => $students

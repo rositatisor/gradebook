@@ -4,16 +4,7 @@
 
 {% block body %}
     <h1>List of Students</h1>
-    <div class="hero-bg"></div>
-    <div class="menu">
-        <a class="nav" href="{{path('grade_index')}}">Grade list</a>
-        <a class="nav" href="{{path('grade_create')}}">New Grade</a>
-        <a class="nav" href="{{path('lecture_index')}}">Lecture list</a>
-        <a class="nav" href="{{path('lecture_create')}}">New Lecture</a>
-        <a class="nav checked" href="{{path('student_index')}}">Student list</a>
-        <a class="nav" href="{{path('student_create')}}">New Student</a>
-    </div>
-    <div class="container author">
+    <div class="container item">
         <div class="sort">
             <p>List order by:</p> 
             <form action="{{path('student_index')}}" method="GET">
@@ -24,15 +15,15 @@
                     <option value="surname_az" {% if sortBy == 'surname_az' %} selected {% endif %}>Surname A-Z</option>
                     <option value="surname_za" {% if sortBy == 'surname_za' %} selected {% endif %}>Surname Z-A</option>
                 </select>
-                <button type="submit">Sort</button>
+                <button class="sort submit-btn" type="submit">Sort</button>
             </form>
             <a href="{{path('student_index')}}">Clear sort</a>
         </div>
-        <ul class="author-list">
+        <ul class="item-list">
             {% for student in students %}
-                <div class="authors">
+                <div class="items">
                     <div class="left">
-                        <div class="preview author"></div>
+                        <div class="preview person"></div>
                     </div>
                     <div class="right">
                         <div class="title">{{student.name}} {{student.surname}}</div>
@@ -41,7 +32,7 @@
                                 {{grade.lecture.name}} {{grade.grade}}
                                 </div>
                             {% endfor %} #}
-                        <div class="buttons author">
+                        <div class="buttons wide items">
                             <a class="edit-btn" href="{{path('student_edit', {id: student.id})}}">Edit</a>
                             <form action="{{path('student_delete', {id:student.id})}}" method="POST">
                                 <button class="submit-btn" type="submit">Delete</button>

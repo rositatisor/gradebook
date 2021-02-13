@@ -4,32 +4,23 @@
 
 {% block body %}
     <h1 class="create">Create new Student</h1>
-    <div class="hero-bg create"></div>
-    <div class="menu">
-        <a class="nav" href="{{path('grade_index')}}">Grade list</a>
-        <a class="nav" href="{{path('grade_create')}}">New Grade</a>
-        <a class="nav" href="{{path('lecture_index')}}">Lecture list</a>
-        <a class="nav" href="{{path('lecture_create')}}">New Lecture</a>
-        <a class="nav" href="{{path('student_index')}}">Student list</a>
-        <a class="nav checked" href="{{path('student_create')}}">New Student</a>
-    </div>
     <div class="container create">
         <form action="{{path('student_store')}}" method="POST">
             <div class="new">
-                <p>Name:</p> 
-                <input type="text" name="student_name" value="{{ student_name }}">
+                <label for="student_name">Name:</label> 
+                <input type="text" name="student_name" value="{{ student_name }}" id="student_name">
             </div>
             <div class="new">
-                <p>Surname:</p> 
-                <input type="text" name="student_surname" value="{{ student_surname }}">
+                <label for="student_surname">Surname:</label> 
+                <input type="text" name="student_surname" value="{{ student_surname }}" id="student_surname">
             </div>
             <div class="new">
-                <p>Email:</p> 
-                <input type="text" name="student_email" value="{{ student_email }}">
+                <label for="student_email">Email:</label> 
+                <input type="text" name="student_email" value="{{ student_email }}" id="student_email">
             </div>
             <div class="new">
-                <p>Phone:</p> 
-                <input type="text" name="student_phone" value="{{ student_phone }}">
+                <label for="student_phone">Phone:</label> 
+                <input type="text" name="student_phone" value="{{ student_phone }}" id="student_phone">
             </div>
             <button class="submit-btn create" type="submit">Add new Student</button>
             {# <input type="hidden" name="token" value="{{csrf_token('')}}"/> #}
