@@ -18,20 +18,17 @@
         {% block javascripts %}{% endblock %}
     </head>
     <body>
-        {% set route_name = app.request.attributes.get('_route') %}
-
-        {% include 'menu.html.twig'%}
-        {% if route_name != 'app_register' %}
-            {% include 'nav.html.twig'%}
-        {% endif %}
         <main>
-            {% if errors is defined and errors|length > 0%}
-                {% include 'msg/validation.html.twig'%}
-            {% endif %}
-            {% if success is defined and success|length > 0%}
-                {% include 'msg/success.html.twig'%}
-            {% endif %}
-            {% block body %}{% endblock %}
+            <div class="container">
+            {% include 'menu.html.twig'%}
+                {% if errors is defined and errors|length > 0%}
+                    {% include 'msg/validation.html.twig'%}
+                {% endif %}
+                {% if success is defined and success|length > 0%}
+                    {% include 'msg/success.html.twig'%}
+                {% endif %}
+                {% block body %}{% endblock %}
+            </div>
         </main>
     </body>
 </html>

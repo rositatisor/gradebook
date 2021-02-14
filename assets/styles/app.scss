@@ -1,8 +1,28 @@
 @import "~bootstrap/scss/bootstrap";
 
 body {
-    background: #fff;
+    background: #EBEBF2;
     position: relative;
+}
+
+main {
+    margin-top: 2rem;
+}
+
+nav {
+    border-radius: 16px 16px 0 0;
+}
+
+.login {
+    display: block;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px;
+    color: #fb0064;
+}
+
+a.login:hover {
+    color: #0a2641;
 }
 
 .validation {
@@ -49,12 +69,40 @@ p.empty {
     background-image: none;
 }
 
-.container {
-    display: inline-block;
-    position: relative;
-    width: 80vw;
-    margin: 0vh 9vw;
+.registration-bg {
+    height: 70vh;
+    background-image: url("http://localhost/gradebook/assets/img/intro1.png");
+    background-color: #fff;
+    // background-size: contain;
+    background-repeat: no-repeat;
+    // background-position-x: 25%;
+    border-radius: 0 0 16px 16px;
+    background-size: 78%;
+    background-position-x: -10%;
+    background-position-y: 55%;
 }
+.login-bg {
+    height: 70vh;
+    background-image: url("http://localhost/gradebook/assets/img/intro4.png");
+    background-color: #fff;
+    background-repeat: no-repeat;
+    border-radius: 0 0 16px 16px;
+    background-size: 78%;
+    background-position-x: -10%;
+    background-position-y: 55%;
+}
+
+.register-title {
+    color: #0a2641;
+    // color: #fb0064;
+}
+
+// .container {
+    // display: inline-block;
+    // position: relative;
+    // width: 80vw;
+    // margin: 0vh 9vw;
+// }
 
 .container.item {
     width: 40vw;
@@ -168,6 +216,37 @@ h1 {
     text-decoration: none;
 }
 
+.nav-item > a.nav-link {
+    color:#fb0064;
+    border: 1px solid transparent;
+    border-radius: 10px;
+}
+.nav-item > a.nav-link.sign-in {
+    color:#fb0064;
+}
+
+.nav-item > a.nav-link.register {
+    color: rgb(0 0 0 / 70%);
+}
+
+.nav-item > a.nav-link.sign-in:hover {
+    color:#fb0064;
+    border:1px solid #fb0064;
+}
+
+.nav-item > a.nav-link.sign-in.checked {
+    font-weight: 500;
+}
+
+.nav-item > a.nav-link.register:hover {
+    color: rgb(0 0 0 / 70%);
+    border:1px solid rgb(0 0 0 / 70%);
+}
+
+.nav-item > a.nav-link.register.checked {
+    font-weight: 500;
+}
+
 .nav:last-of-type {
     margin-right: 0;
 }
@@ -267,17 +346,25 @@ ul {
     width: 50%;
 }
 
-// .buttons.item form:last-of-type {
-//     display: inline-block;
-//     width: 100%;
-// }
-
 .card.register {
-    margin-top: 30px;
+    margin: 30px 0;
+    border-radius: 20px;
+    background: #F7F7FA;
 }
 
-.card {
+.card.login {
     margin-top: 0;
+    height: 100%;
+    background: #F7F7FA;
+    border-radius: 0 0 16px 0;
+}
+
+.col-md-4.signup{
+    padding-right: 0px;
+}
+
+.card-body.login {
+    margin-top:50px;
 }
 
 form {
@@ -291,6 +378,34 @@ form {
 
 form.registration {
     width: 100%;
+}
+
+.form-check.custom label.required {
+    font-size: 14px;
+}
+
+.form-check-input {
+    margin-top: 0.5rem;
+}
+
+.form-check-input.custom {
+    display: block;
+    float: left;
+    position: unset;
+}
+
+.form-control.signup {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+    border-radius: unset;
+    background: #F7F7FA;
+    // #0a2641
+    // #fb0064
+}
+
+.form-control:focus {
+    border: none;
+    box-shadow: 0 0 0 0.2rem rgb(0 0 0 / 8%);
 }
 
 .buttons.wide > form {
@@ -380,10 +495,32 @@ form.registration {
     background: #544F9A;
 }
 
-.form-check-input.custom {
-    display: block;
-    float: left;
-    position: unset;
+.registration button,
+.login button {
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #fb0064;
+    border-color: #fb0064;
+}
+
+.registration button:hover,
+.login button:hover {
+    background: #e2005a;
+    border-color: #e2005a;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #f7f7fa inset !important;
 }
 
 @media (max-width: 1100px) {

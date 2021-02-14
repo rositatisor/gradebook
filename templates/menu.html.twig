@@ -1,6 +1,7 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+{% set route_name = app.request.attributes.get('_route') %}
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm col-12">
 	<div class="container">
-		<a class="navbar-brand" href="">Library</a>
+		<a class="navbar-brand" href="">Gradebook</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -11,48 +12,61 @@
 			<ul	class="navbar-nav ml-auto justify-content-end">
 				<!-- Authentication Links -->
 				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					{# <li class="nav-item dropdown">
+					<li class="nav-item dropdown">
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-							Authors
+							Student
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="{{ path('author_index') }}">
-								Authors List
+							<a class="dropdown-item" href="{{ path('student_index') }}">
+								Student List
 							</a>
-							<a class="dropdown-item" href="{{ path('author_create') }}">
-								New Author
+							<a class="dropdown-item" href="{{ path('student_create') }}">
+								New Student
 							</a>
 						</div>
 					</li>
 					<li class="nav-item dropdown">
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-							Books
+							Lecture
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="{{ path('book_index') }}">
-								Books List
+							<a class="dropdown-item" href="{{ path('lecture_index') }}">
+								Lecture List
 							</a>
-							<a class="dropdown-item" href="{{ path('book_create') }}">
-								New Book
+							<a class="dropdown-item" href="{{ path('lecture_create') }}">
+								New Lecture
 							</a>
 						</div>
-					</li> #}
+					</li>
+					<li class="nav-item dropdown">
+						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+							Grade
+						</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="{{ path('grade_index') }}">
+								Grade List
+							</a>
+							<a class="dropdown-item" href="{{ path('grade_create') }}">
+								New Grade
+							</a>
+						</div>
+					</li>
 					<li class="nav-item dropdown">
 						<a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 							{{ app.user.username }}
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="{{ path('app_logout') }}">
-								Logout
+								Log out
 							</a>
 						</div>
 					</li>
 				{% else %}
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_login') }}">Login</a>
+						<a class="nav-link sign-in {% if route_name == 'app_login' %} checked {% endif %}" href="{{ path('app_login') }}">Sign-in</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="{{ path('app_register') }}">Register</a>
+						<a class="nav-link register {% if route_name == 'app_register' %} checked {% endif %}" href="{{ path('app_register') }}">Register</a>
 					</li>
 				{% endif %}
 			</ul>
