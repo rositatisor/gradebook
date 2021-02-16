@@ -56,21 +56,6 @@ p.empty {
     text-align: left;
 }
 
-.hero-bg {
-    height: 200px;
-    background-image: url("http://localhost/biblioteka/assets/img/hero.gif");
-    background-color: #F7BDD6;
-    background-attachment: fixed;
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: 40%;
-}
-
-.hero-bg.create {
-    height: 0px;
-    background-image: none;
-}
-
 .bg {
     height: auto;
     background-color: #fff;
@@ -93,21 +78,13 @@ p.empty {
 }
 
 .login-bg {
-    height: 70vh;
+    height: auto;
     background-image: url("http://localhost/gradebook/assets/img/intro4.png");
 }
 
 .register-title {
     color: #0a2641;
-    // color: #fb0064;
 }
-
-// .container {
-    // display: inline-block;
-    // position: relative;
-    // width: 80vw;
-    // margin: 0vh 9vw;
-// }
 
 .item-list {
     display: inline-block;
@@ -194,18 +171,6 @@ h1 {
     border-bottom: 1px solid #3A3B64;
 }
 
-.nav {
-    display: inline-block;
-    width: 25%;
-    min-width: 115px;
-    height: 30px;
-    line-height: 30px;
-    font-size: 15px;
-    color: #3A3B64;
-    text-align: center;
-    text-decoration: none;
-}
-
 .nav-item > a.nav-link {
     color:#fb0064;
     border: 1px solid transparent;
@@ -238,19 +203,8 @@ h1 {
     font-weight: 500;
 }
 
-.nav:last-of-type {
-    margin-right: 0;
-}
-
-.nav:hover,
-.nav.checked {
-    background: #544F9A;
-    color: #fff;
-}
-
 .item {
     display: block;
-    // float: left;
     width: 25%;
     height: 250px;
     margin: 0 0 20px;
@@ -299,7 +253,7 @@ ul {
 }
 
 .preview.person {
-    background-image: url("http://localhost/biblioteka/assets/img/author3.png");
+    background-image: url("http://localhost/gradebook/assets/img/bg3.jpg");
     float: right;
     margin-right: 10px;
 }
@@ -410,8 +364,6 @@ form.signup {
     border-bottom: 1px solid #ced4da;
     border-radius: unset;
     background: #F7F7FA;
-    // #0a2641
-    // #fb0064
 }
 
 .form-control:focus {
@@ -553,9 +505,6 @@ select:-webkit-autofill:focus {
 }
 
 @media (max-width: 1100px) {
-    .hero-bg {
-        background-size: 50%;
-    }
     .new label {
        text-align: left; 
        width: 100%;
@@ -567,9 +516,6 @@ select:-webkit-autofill:focus {
 }
 
 @media (max-width: 1000px) {
-    .hero-bg {
-        background-size: 60%;
-    }
     .item {
         width: 33%;
     }
@@ -579,44 +525,19 @@ select:-webkit-autofill:focus {
 }
 
 @media (max-width: 850px) {
-    .hero-bg {
-        background-size: 80%;
-    }
-
     .item {
         width: 50%;
     }
     .preview {
         width: 80px;
     }
-    .container.create {
-        width: 50vw;
-        margin: 0vh 24vw;
-    }
 }
 
 @media (max-width: 650px) {
-    .hero-bg {
-        background-size: 90%;
-    }
     .item {
         width: 100%;
     }
     .preview {
         width: 80px;
-    }
-    .container.create {
-        width: 70vw;
-        margin: 0vh 14vw;
-    }
-}
-
-@media (max-width: 550px) {
-    .hero-bg {
-        background-size: 110%;
-    }
-    .container.create {
-        width: 90vw;
-        margin: 0vh 4vw;
     }
 }
