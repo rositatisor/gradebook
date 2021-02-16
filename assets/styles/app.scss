@@ -79,10 +79,12 @@ p.empty {
     background-size: 78%;
     background-position-x: -10%;
     background-position-y: 55%;
+    padding-bottom: 58px;
 }
 
 .bg.msg {
     border-radius: unset;
+    padding-bottom: unset;
 }
 
 .registration-bg {
@@ -106,23 +108,6 @@ p.empty {
     // width: 80vw;
     // margin: 0vh 9vw;
 // }
-
-.container.item {
-    width: 40vw;
-    margin: 0vh 29vw;
-}
-
-.container.item .left {
-    display: block;
-    float: left;
-    width: 30%;
-}
-
-.container.item .right {
-    display: block;
-    float: left;
-    width: 70%;
-}
 
 .item-list {
     display: inline-block;
@@ -195,7 +180,7 @@ h1 {
     text-align: center;
     color: #3A3B64;
     font-size: 30px;
-    margin-bottom: 20px;
+    margin: 20px 0;
 }
 
 .menu {
@@ -329,6 +314,10 @@ ul {
     text-align: center;
 }
 
+.title.left {
+    text-align: unset;
+}
+
 .right .title {
     width: 100%;
 }
@@ -371,7 +360,7 @@ ul {
 
 .card.login {
     margin-top: 0;
-    height: 100%;
+    height: calc(100% + 58px);
     background: #F7F7FA;
     border-radius: 0 0 16px 0;
 }

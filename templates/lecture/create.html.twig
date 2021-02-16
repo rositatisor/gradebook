@@ -3,8 +3,10 @@
 {% block title %}Create new Lecture!{% endblock %}
 
 {% block body %}
+<div class="container">
+<div class="row bg">
     <h1 class="create">Create new Lecture</h1>
-    <div class="container create">
+    <div class="container create col-sm-6">
         <form action="{{path('lecture_store')}}" method="POST">
             <div class="new">
                 <label for="lecture_name">Name:</label> 
@@ -18,4 +20,6 @@
             {# <input type="hidden" name="token" value="{{csrf_token('')}}"/> #}
         </form>
     </div>
+</div>
+</div>
 {% endblock %}
