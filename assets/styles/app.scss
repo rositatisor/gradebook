@@ -361,6 +361,7 @@ ul {
 
 .col-md-4.signup{
     padding-right: 0px;
+    padding-left: 0px;
 }
 
 .card-body.login {
@@ -504,10 +505,17 @@ form.registration {
     border-color: #fb0064;
 }
 
-.registration button:hover,
-.login button:hover {
+.registration button.btn.btn-primary:hover,
+.registration button.btn.btn-primary:active,
+.registration button.btn.btn-primary:focus,
+.registration button.btn.btn-primary:focus:active,
+.login button.btn.btn-primary:hover,
+.login button.btn.btn-primary:active,
+.login button.btn.btn-primary:focus,
+.login button.btn.btn-primary:focus:active {
     background: #e2005a;
     border-color: #e2005a;
+    box-shadow: none;
 }
 
 input:-webkit-autofill,
