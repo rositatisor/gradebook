@@ -3,18 +3,18 @@
 {% block title %}Log in!{% endblock %}
 {% block body %}
 <div class="container">
-    <div class="row justify-content-end login-bg">
+    <div class="row justify-content-end bg login-bg">
         <div class="col-md-4 signup">
             <div class="card login">
-                <form method="post">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-
+                <form class="signup" method="post">
                     {% if app.user %}
-                        <div class="mb-3">
+                        <div class="mb-3 logged">
                             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
                         </div>
+                    {% endif %}
+
+                    {% if error %}
+                        <div class="alert alert-danger invalid-credentials">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
 
                     <div class="card-body login">

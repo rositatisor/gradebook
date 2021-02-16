@@ -1,10 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Grades list{% endblock %}
+{% block title %}Grades{% endblock %}
 
 {% block body %}
-    <h1>Grades</h1>
-    <div class="container">
+<div class="container">
+    <div class="row bg">
+        <h1>Grades</h1>
         <div class="filter">
             <p>Filter list by:</p>
             <form action="{{path('grade_index')}}" method="GET">
@@ -18,26 +19,30 @@
             </form>
             <a href="{{path('grade_index')}}">Clear filter</a>
         </div>
-        <ul class="item-list">
-            {% if grades is empty %}
-            <p>There are no grades to show for selected student.</p>
-            {% endif %}
-            {% for grade in grades %}
-                <div class="item">
-                    <div class="preview item"></div>
-                    <p class="name">
-                    {{grade.student.name}} {{grade.student.surname}} {{grade.lecture.name}}
-                    </p>
-                    <p class="title">Grade: {{grade.grade}}</p>
-                    <div class="buttons">
-                        <a class="edit-btn" href="{{path('grade_edit', {id: grade.id})}}">Edit</a>
-                        <form action="{{path('grade_delete', {id:grade.id})}}" method="POST">
-                            <button class="submit-btn" type="submit">Delete</button>
-                        </form>
+        <div class="container item-list">
+            <ul class="row">
+                {% if grades is empty %}
+                <p>There are no grades to show for selected student.</p>
+                {% endif %}
+                {% for grade in grades %}
+                    <div class="col-sm-4">
+                        <div class="pic"><div class="preview item"></div></div>
+                        <p class="name">
+                            {{grade.student.name}} {{grade.student.surname}} 
+                        </p>
+                        <p class="name">{{grade.lecture.name}}</p>
+                        <p class="title">Grade: {{grade.grade}}</p>
+                        <div class="buttons wide">
+                            <a class="edit-btn" href="{{path('grade_edit', {id: grade.id})}}">Edit</a>
+                            <form action="{{path('grade_delete', {id:grade.id})}}" method="POST">
+                                <button class="submit-btn" type="submit">Delete</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </ul>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
+</div>
 {% endblock %}
 

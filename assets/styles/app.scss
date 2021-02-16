@@ -7,6 +7,7 @@ body {
 
 main {
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 nav {
@@ -32,7 +33,8 @@ a.login:hover {
 }
 
 .filter a,
-.sort a {
+.sort a,
+.logged a {
     display: inline-block;
     font-size: 14px;
     height: 22px;
@@ -69,27 +71,28 @@ p.empty {
     background-image: none;
 }
 
-.registration-bg {
-    height: 70vh;
-    background-image: url("http://localhost/gradebook/assets/img/intro1.png");
+.bg {
+    height: auto;
     background-color: #fff;
-    // background-size: contain;
     background-repeat: no-repeat;
-    // background-position-x: 25%;
     border-radius: 0 0 16px 16px;
     background-size: 78%;
     background-position-x: -10%;
     background-position-y: 55%;
 }
+
+.bg.msg {
+    border-radius: unset;
+}
+
+.registration-bg {
+    height: 70vh;
+    background-image: url("http://localhost/gradebook/assets/img/intro1.png");
+}
+
 .login-bg {
     height: 70vh;
     background-image: url("http://localhost/gradebook/assets/img/intro4.png");
-    background-color: #fff;
-    background-repeat: no-repeat;
-    border-radius: 0 0 16px 16px;
-    background-size: 78%;
-    background-position-x: -10%;
-    background-position-y: 55%;
 }
 
 .register-title {
@@ -121,16 +124,14 @@ p.empty {
     width: 70%;
 }
 
-.container.create {
-    width: 30vw;
-    margin: 0vh 34vw;
+.item-list {
+    display: inline-block;
 }
 
 .filter,
 .sort {
     display: inline-block;
     width: 100%;
-    height: 27px;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -150,6 +151,10 @@ ul {
     display: block;
     float: left;
     width: 100%;
+}
+
+ul.row {
+    width: auto;
 }
 
 .new {
@@ -221,6 +226,7 @@ h1 {
     border: 1px solid transparent;
     border-radius: 10px;
 }
+
 .nav-item > a.nav-link.sign-in {
     color:#fb0064;
 }
@@ -259,7 +265,7 @@ h1 {
 
 .item {
     display: block;
-    float: left;
+    // float: left;
     width: 25%;
     height: 250px;
     margin: 0 0 20px;
@@ -288,7 +294,7 @@ ul {
 
 .preview {
     display: block;
-    float: left;
+    // float: left;
     height: 80px;
     width: 80px;
     border-radius: 40px;
@@ -296,11 +302,17 @@ ul {
     background-size: cover;
 }
 
-.preview.item {
-    background-image: url("http://localhost/biblioteka/assets/img/book-rocket.png");
-    opacity: 0.8;
-    
+.pic {
+    display: inline-block;
+    width: 100%;
 }
+
+.preview.item {
+    background-image: url("http://localhost/gradebook/assets/img/bg3.jpg");
+    opacity: 0.8;
+    margin: auto;
+}
+
 .preview.person {
     background-image: url("http://localhost/biblioteka/assets/img/author3.png");
     float: right;
@@ -310,11 +322,11 @@ ul {
 .title {
     display: block;
     float: left;
-    width: 90%;
-    // height: 55px;
+    width: 100%;
     font-size: 18px;
     text-transform: uppercase;
     color: #544F9A;
+    text-align: center;
 }
 
 .right .title {
@@ -324,14 +336,19 @@ ul {
 .name {
     display: block;
     float: left;
-    width: 90%;
+    width: 100%;
     font-size: 14px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+.name:nth-of-type(2) {
     margin-bottom: 10px;
 }
 
 .buttons {
     display: inline-block;
-    width: 90%;
+    width: 100%;
     outline: none;
     margin-bottom: 10px;
 }
@@ -379,6 +396,10 @@ form {
 
 form.registration {
     width: 100%;
+}
+
+form.signup {
+    position: relative;
 }
 
 .form-check.custom label.required {
@@ -529,6 +550,17 @@ select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px #f7f7fa inset !important;
+}
+
+.alert.invalid-credentials {
+    position: absolute;
+    width: 100%;
+}
+
+.alert .font-sm{
+    font-size: 13px;
+    text-align: center;
+    padding: 0.4rem 1.25rem;
 }
 
 @media (max-width: 1100px) {
