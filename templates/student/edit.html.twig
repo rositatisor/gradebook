@@ -3,8 +3,10 @@
 {% block title %}Edit Student{% endblock %}
 
 {% block body %}
+<div class="container">
+<div class="row bg">
     <h1>Edit Student</h1>
-    <div class="container create">
+    <div class="container create col-sm-5">
         <form action="{{path('student_update', {id:student.id})}}" method="POST">
             <div class="new">
                 <label for="student_name">Name:</label> 
@@ -26,4 +28,6 @@
             {# <input type="hidden" name="token" value="{{csrf_token('')}}"/> #}
         </form>
     </div>
+</div>
+</div>
 {% endblock %}

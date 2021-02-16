@@ -3,27 +3,30 @@
 {% block title %}Students list{% endblock %}
 
 {% block body %}
-    <h1>List of Students</h1>
-    <div class="container item">
-        <ul class="item-list">
-                <div class="items">
-                    <div class="left">
-                        <div class="preview person"></div>
-                    </div>
-                    <div class="right">
-                        <div class="title">{{student.name}} {{student.surname}}</div>
-                            {% if student.grades is empty %}
-                            <p class="empty">There are no grades to show.</p>
-                            {% endif %}
-                            {% for grade in student.grades %}
-                                <div class="list">
-                                {{grade.lecture.name}} {{grade.grade}}
-                                </div>
-                            {% endfor %}
-                        <div class="buttons item">
+<div class="container">
+<div class="row bg">
+    <h1>Grades of {{student.name}} {{student.surname}}</h1>
+    <div class="container item-list col-sm-6">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="preview person"></div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="title left">{{student.name}} {{student.surname}}</div>
+                        {% if student.grades is empty %}
+                        <p class="empty">There are no grades to show.</p>
+                        {% endif %}
+                        {% for grade in student.grades %}
+                            <div class="list">
+                            {{grade.lecture.name}} {{grade.grade}}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
-        </ul>
+        </div>
     </div>
+</div>
+</div>
 {% endblock %}
