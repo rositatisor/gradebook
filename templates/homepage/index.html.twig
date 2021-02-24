@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Grades{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row bg hp">
+        {% if app.user %}
+            <h1>Welcome back, {{app.user.username}}</h1>
+        {% else %}
+            <h1>Welcome to the Gradebook</h1>
+        {% endif %}
+        <div class="container">
+            <div>
+                <p>Lists</p>
+                <a>Explore all</a>
+            </div>
+            <div class="container">
+                <div class="row justify-content-around gap">
+                    <div class="col-md rounded">
+                        <a class="text-center" href="http://localhost/gradebook/public/lecture">
+                            <img src="http://localhost/gradebook/assets/img/hp1.png" class="rounded mx-auto d-block" alt="Lecture illustration">
+                            <h3>Lectures</h3>
+                            <p>Check the list of lectures and grades already assigned.</p>
+                        </a>
+                    </div>
+                    <div class="col-md rounded">
+                        <a class="text-center" href="http://localhost/gradebook/public/student">
+                            <img src="http://localhost/gradebook/assets/img/hp2.png" class="rounded mx-auto d-block" alt="Student illustration">
+                            <h3>Students</h3>
+                            <p>Check the list of students.</p>
+                        </a>
+                    </div>
+                    <div class="col-md rounded">
+                        <a class="text-center" href="http://localhost/gradebook/public/grade">
+                            <img src="http://localhost/gradebook/assets/img/hp3.png" class="rounded mx-auto d-block" alt="Grade illustration">
+                            <h3>Grades</h3>
+                            <p>Check the list of students and evaluation of lectures.</p>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <p>Create new</p>
+                    <a>Explore all</a>
+                </div>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="row">
+                            <div class="col-sm">
+                                One of three columns
+                            </div>
+                            <div class="col-sm">
+                                One of three columns
+                            </div>
+                            <div class="col-sm">
+                                One of three columns
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm">
+                            Settings
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
