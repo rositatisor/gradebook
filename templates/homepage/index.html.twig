@@ -5,61 +5,60 @@
 {% block body %}
 <div class="container">
     <div class="row bg hp">
-        {% if app.user %}
+        {# {% if app.user %}
             <h1>Welcome back, {{app.user.username}}</h1>
         {% else %}
             <h1>Welcome to the Gradebook</h1>
-        {% endif %}
+        {% endif %} #}
         <div class="container">
-            <div>
-                <p>Lists</p>
-                <a>Explore all</a>
-            </div>
-            <div class="container">
+            <div class="container hp">
+                <div class="row">
+                    <h3>Lists</h3>
+                </div>
                 <div class="row justify-content-around gap">
                     <div class="col-md rounded">
-                        <a class="text-center" href="http://localhost/gradebook/public/lecture">
+                        <a class="hp" href="http://localhost/gradebook/public/lecture">
                             <img src="http://localhost/gradebook/assets/img/hp1.png" class="rounded mx-auto d-block" alt="Lecture illustration">
-                            <h3>Lectures</h3>
-                            <p>Check the list of lectures and grades already assigned.</p>
+                            <h4 class="text-blue">Lectures</h4>
+                            <p class="text-grey">Check the list of lectures and grades already assigned.</p>
                         </a>
                     </div>
                     <div class="col-md rounded">
-                        <a class="text-center" href="http://localhost/gradebook/public/student">
+                        <a class="hp" href="http://localhost/gradebook/public/student">
                             <img src="http://localhost/gradebook/assets/img/hp2.png" class="rounded mx-auto d-block" alt="Student illustration">
-                            <h3>Students</h3>
-                            <p>Check the list of students.</p>
+                            <h4 class="text-green">Students</h4>
+                            <p class="text-grey">Check the list of students.</p>
                         </a>
                     </div>
                     <div class="col-md rounded">
-                        <a class="text-center" href="http://localhost/gradebook/public/grade">
+                        <a class="hp" href="http://localhost/gradebook/public/grade">
                             <img src="http://localhost/gradebook/assets/img/hp3.png" class="rounded mx-auto d-block" alt="Grade illustration">
-                            <h3>Grades</h3>
-                            <p>Check the list of students and evaluation of lectures.</p>
+                            <h4 class="text-orange">Grades</h4>
+                            <p class="text-grey">Check the list of students and evaluation of lectures.</p>
                         </a>
                     </div>
                 </div>
-                <div>
-                    <p>Create new</p>
-                    <a>Explore all</a>
-                </div>
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="row">
-                            <div class="col-sm">
-                                One of three columns
+                <div class="row gap">
+                    <div class="col-8">
+                        <h3>Create new</h3>
+                        <div class="row rounded">
+                            <div class="col-md">
+                                Lecture
                             </div>
-                            <div class="col-sm">
-                                One of three columns
+                            <div class="col-md">
+                                Student
                             </div>
-                            <div class="col-sm">
-                                One of three columns
+                            <div class="col-md">
+                                Grade
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="col-sm">
-                            Settings
+                    <div class="col-md">
+                        <h3>Settings</h3>
+                        <div class="row rounded">
+                            <div class="col-md">
+                                Settings
+                            </div>
                         </div>
                     </div>
                 </div>
