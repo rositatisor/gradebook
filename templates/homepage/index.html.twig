@@ -13,7 +13,9 @@
         <div class="container">
             <div class="container hp">
                 <div class="row">
-                    <h3>Lists</h3>
+                    <div class="col-md">
+                        <h3>Lists</h3>
+                    </div>
                 </div>
                 <div class="row justify-content-around gap">
                     <div class="col-md rounded expand">
@@ -59,10 +61,36 @@
                         </div>
                     </div>
                     <div class="col-md">
-                        <h3>Settings</h3>
+                        <h3>Your status</h3>
                         <div class="row rounded">
                             <div class="col-md">
-                                Settings
+                                <div class="create" >
+                                    {# <div class="profile icon"></div> #}
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn status" data-toggle="modal" data-target="#exampleModalCenter">
+                                        <img class="mod" src="http://localhost/gradebook/assets/img/hp4.png">
+                                        <h5 class="title-status">Teacher</h5>
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLongTitle">Status - Teacher</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h5>Teacher account can access the following content:</h5>
+                                            <p>1. Add new lectures;</p>
+                                            <p>2. Add students to the database;</p>
+                                            <p>3. Assign grades to the students.</p>
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

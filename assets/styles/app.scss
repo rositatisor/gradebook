@@ -91,6 +91,11 @@ div.gap {
     }
 }
 
+.mod {
+    display: inline-block;
+    width: 76px;
+}
+
 .login {
     display: block;
     font-size: 14px;
@@ -397,6 +402,14 @@ ul {
     width: 100%;
 }
 
+.title-status {
+    display: inline-block;
+}
+
+.description-status {
+    display: inline-block;
+}
+
 .name {
     display: block;
     float: left;
@@ -586,6 +599,14 @@ form.signup {
     border-radius: 10px;
     background-color: #fb0064;
     border-color: #fb0064;
+}
+
+.status.btn:focus {
+    box-shadow: none;
+}
+
+.status.btn:hover {
+    transform: scale(1.05);
 }
 
 .registration button.btn.btn-primary:hover,
