@@ -1,10 +1,15 @@
 @import "~bootstrap/scss/bootstrap";
 
 $blue: #3c7eec;
+$light-blue: #E4EAF7;
 $green: #93cb5b;
+$light-green: #ECF2E9;
 $orange: #f15d23;
+$light-orange: #F5E7E3;
 $pink: #fb0064;
 $dark: #212121;
+$light-bg: #F7F7FA;
+$dark-bg: #EBEBF2;
 
 body {
     background: #EBEBF2;
@@ -26,10 +31,64 @@ img.rounded.d-block {
 
 div.rounded {
     background: #fff;
+    box-shadow: 0 0.3rem 1rem rgb(0 0 0 / 3%);
+    
+    &.expand:hover {
+       transform: scale(1.05); 
+    }
 }
 
 div.gap {
     column-gap: 20px;
+    row-gap: 20px;
+
+    a {
+        display: inline-block;
+        color: $dark;
+        
+        &.create:hover {
+            font-weight: bold;
+            text-decoration: none;
+            transform: scale(1.1);
+        }
+    }
+    
+    .border {
+        border: none !important;
+        border-right: 1.5px solid $dark-bg !important;
+        border-left: 1.5px solid $dark-bg !important;
+    }
+
+    .icon {
+        display: block;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        margin-top: 0.5rem;
+        margin-bottom: 0.2rem;
+        background-size: cover;
+        border-radius: 25px;
+        
+        &.lecture {
+            background-image: url(http://localhost/gradebook/assets/img/lecture-icon.png);
+            background-color: $light-blue;
+        }
+        
+        &.student {
+            background-image: url(http://localhost/gradebook/assets/img/student-icon.png);
+            background-color: $light-green;
+        }
+        
+        &.grade {
+            background-image: url(http://localhost/gradebook/assets/img/grade-icon.png);
+            background-color: $light-orange;
+        }
+    }
+    
+    p {
+        margin-bottom: 0.5rem;
+        font-size: 14px;
+    }
 }
 
 .login {
@@ -38,10 +97,10 @@ div.gap {
     text-align: center;
     margin-top: 5px;
     color: #fb0064;
-}
 
-a.login:hover {
-    color: #0a2641;
+    &:hover {
+        color: #0a2641;
+    }
 }
 
 .validation {
@@ -65,25 +124,25 @@ a.hp {
     h4 {
         font-weight: 400;
     }
-}
 
-a.hp:hover {
-    text-decoration: none;
-
-    h4 {
-        font-weight: 500;
-    }
-
-    h4.text-blue {
-        color: $blue;
-    }
-
-    h4.text-green {
-        color: $green;
-    }
-
-    h4.text-orange {
-        color: $orange;
+    &:hover {
+        text-decoration: none;
+    
+        h4 {
+            font-weight: 500;
+        }
+    
+        h4.text-blue {
+            color: $blue;
+        }
+    
+        h4.text-green {
+            color: $green;
+        }
+    
+        h4.text-orange {
+            color: $orange;
+        }
     }
 }
 
@@ -113,6 +172,7 @@ p.empty {
 
 .bg.hp {
     background-color: #F7F7FA;
+    box-shadow: 0 0.1rem 1rem 10px rgb(0 0 0 / 6%);
 }
 
 .bg.msg {
